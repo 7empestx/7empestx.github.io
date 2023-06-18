@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { mergeWith } = require('lodash');
 const { outputPath, devServerPort } = require('./scripts/config');
 const examplesList = require('./examples-list');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const mergeArrays = (a, b) => (Array.isArray(a) ? a.concat(b) : undefined);
 

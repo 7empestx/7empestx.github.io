@@ -13,8 +13,8 @@ function getPageContent(pageName, { title }) {
     <title>Cloudscape Demos - ${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="vendor.css" rel="stylesheet">
-    <link href="${pageName}.css" rel="stylesheet">
+    <link href="/vendor.css" rel="stylesheet">
+    <link href="/${pageName}.css" rel="stylesheet">
   </head>
   <body id="b">
     <header class="custom-main-header" id="h">
@@ -23,10 +23,25 @@ function getPageContent(pageName, { title }) {
       </ul>
     </header>
     <div id="app"></div>
-    <script src="libs/fake-server.js"></script>
-    <script src="vendor.js"></script>
-    <script src="${pageName}.js"></script>
+    <script src="/libs/fake-server.js"></script>
+    <script src="/vendor.js"></script>
+    <script src="/${pageName}.js"></script>
   </body>
+</html>
+`;
+}
+
+
+// New function to generate content for the index.html file
+function getIndexPageContent(defaultPage) {
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Refresh" content="0; url=${defaultPage}.html" />
+</head>
+<body>
+</body>
 </html>
 `;
 }
@@ -38,10 +53,24 @@ function generateHtmlFile(page) {
   return writeFileAsync(filePath, content);
 }
 
-const generateHtmlFiles = () => {
+async function generateIndexHtmlFile(defaultPage) {
+  const content = getIndexPageContent(defaultPage);
+  const filePath = path.join(outputPath, 'index.html');
+  await writeFileAsync(filePath, content);
+}
+
+const generateHtmlFiles = async () => {
   const promises = [];
   for (const page of examplesList) {
     promises.push(generateHtmlFile(page));
+
+    // If this is the default page, also generate it as index.html
+    if (page.path === 'configurable-dashboard') {  // Replace 'cards' with your chosen default page
+      const pageName = 'index';  // Set the page name to 'index'
+      const content = getPageContent(page.path.split('/').pop(), page);  // Use original page name for CSS and JS files
+      const filePath = path.join(outputPath, `${pageName}.html`);
+      promises.push(writeFileAsync(filePath, content));
+    }
   }
 
   return Promise.all(promises);
