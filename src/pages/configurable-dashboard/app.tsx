@@ -50,7 +50,6 @@ export function App() {
         tools={toolsContent}
         onToolsChange={({ detail }) => setToolsOpen(detail.open)}
         ariaLabels={appLayoutAriaLabels}
-        notifications={<Notifications />}
         content={
           <ContentLayout
             header={

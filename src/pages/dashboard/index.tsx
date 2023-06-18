@@ -16,19 +16,7 @@ import { appLayoutAriaLabels } from '../../i18n-strings';
 import { DashboardHeader, DashboardMainInfo } from './components/header';
 import { DashboardSideNavigation } from './components/side-navigation';
 import { Breadcrumbs, Notifications, HelpPanelProvider } from '../commons';
-import {
-  BaseStaticWidget,
-  alarms,
-  serviceOverview,
-  instanceHours,
-  serviceHealth,
-  events,
-  instanceLimits,
-  networkTraffic,
-  accountAttributes,
-  featuresSpotlight,
-  zoneStatus,
-} from './widgets';
+import { BaseStaticWidget, resumeHeading } from './widgets';
 
 function Content() {
   return (
@@ -46,18 +34,7 @@ function Content() {
         { colspan: { l: 4, m: 4, default: 12 } },
       ]}
     >
-      {[
-        serviceOverview,
-        serviceHealth,
-        instanceHours,
-        networkTraffic,
-        alarms,
-        instanceLimits,
-        events,
-        zoneStatus,
-        featuresSpotlight,
-        accountAttributes,
-      ].map((widget, index) => (
+      {[resumeHeading].map((widget, index) => (
         <BaseStaticWidget key={index} config={widget.data} />
       ))}
     </Grid>
@@ -86,7 +63,6 @@ function App() {
         }
         breadcrumbs={<Breadcrumbs items={[{ text: 'Dashboard', href: '#/' }]} />}
         navigation={<DashboardSideNavigation />}
-        tools={toolsContent}
         toolsOpen={toolsOpen}
         onToolsChange={({ detail }) => setToolsOpen(detail.open)}
         ariaLabels={appLayoutAriaLabels}

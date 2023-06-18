@@ -31,7 +31,6 @@ function getPageContent(pageName, { title }) {
 `;
 }
 
-
 // New function to generate content for the index.html file
 function getIndexPageContent(defaultPage) {
   return `
@@ -65,9 +64,10 @@ const generateHtmlFiles = async () => {
     promises.push(generateHtmlFile(page));
 
     // If this is the default page, also generate it as index.html
-    if (page.path === 'configurable-dashboard') {  // Replace 'cards' with your chosen default page
-      const pageName = 'index';  // Set the page name to 'index'
-      const content = getPageContent(page.path.split('/').pop(), page);  // Use original page name for CSS and JS files
+    if (page.path === 'configurable-dashboard') {
+      // Replace 'cards' with your chosen default page
+      const pageName = 'index'; // Set the page name to 'index'
+      const content = getPageContent(page.path.split('/').pop(), page); // Use original page name for CSS and JS files
       const filePath = path.join(outputPath, `${pageName}.html`);
       promises.push(writeFileAsync(filePath, content));
     }

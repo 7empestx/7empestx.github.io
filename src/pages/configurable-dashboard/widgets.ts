@@ -2,50 +2,17 @@
 // SPDX-License-Identifier: MIT-0
 import { BoardProps } from '@cloudscape-design/board-components/board';
 import { StoredWidgetPlacement } from './interfaces';
-import {
-  accountAttributes,
-  alarms,
-  serviceOverview,
-  events,
-  serviceHealth,
-  instanceLimits,
-  instanceHours,
-  networkTraffic,
-  operationalMetrics,
-  zoneStatus,
-  featuresSpotlight,
-} from '../dashboard/widgets';
+import { resumeHeading } from '../dashboard/widgets';
 import { DashboardWidgetItem, WidgetConfig, WidgetDataType } from '../dashboard/widgets/interfaces';
 
 export type { DashboardWidgetItem };
 export { PaletteItem } from './components/palette-item';
 
 export const allWidgets: Record<string, WidgetConfig> = {
-  accountAttributes,
-  alarms,
-  serviceOverview,
-  featuresSpotlight,
-  events,
-  serviceHealth,
-  operationalMetrics,
-  instanceLimits,
-  networkTraffic,
-  instanceHours,
-  zoneStatus,
+  resumeHeading,
 };
 
-const defaultLayout: ReadonlyArray<StoredWidgetPlacement> = [
-  { id: 'serviceOverview' },
-  { id: 'serviceHealth' },
-  { id: 'instanceHours' },
-  { id: 'networkTraffic' },
-  { id: 'alarms' },
-  { id: 'instanceLimits' },
-  { id: 'events' },
-  { id: 'zoneStatus' },
-  { id: 'featuresSpotlight' },
-  { id: 'accountAttributes' },
-];
+const defaultLayout: ReadonlyArray<StoredWidgetPlacement> = [{ id: 'resumeHeading' }];
 
 function merge<T extends { id: string }>(
   src: ReadonlyArray<T>,

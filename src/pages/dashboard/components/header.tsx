@@ -6,43 +6,18 @@ import { ExternalLinkGroup, InfoLink, useHelpPanel } from '../../commons';
 
 export function DashboardMainInfo() {
   return (
-    <HelpPanel
-      header={<h2>Service</h2>}
-      footer={
-        <ExternalLinkGroup
-          items={[
-            { href: '#', text: 'User Guide for Linux Instances' },
-            { href: '#', text: 'User Guide for Windows Instances' },
-            { href: '#', text: 'API Reference' },
-            { href: '#', text: 'EC2 section of the AWS CLI Reference' },
-            { href: '#', text: 'EC2 Instance Connect API Reference' },
-          ]}
-        />
-      }
-    >
-      <p>
-        Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizeable computing
-        capacity&mdash;literally, servers in Amazon's data centers&mdash;that you use to build and host your software
-        systems.
-      </p>
-    </HelpPanel>
+    <p>
+      Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizeable computing
+      capacity&mdash;literally, servers in Amazon's data centers&mdash;that you use to build and host your software
+      systems.
+    </p>
   );
 }
 
 export function DashboardHeader({ actions }: { actions: React.ReactNode }) {
-  const loadHelpPanelContent = useHelpPanel();
   return (
-    <Header
-      variant="h1"
-      info={
-        <InfoLink
-          onFollow={() => loadHelpPanelContent(<DashboardMainInfo />)}
-          ariaLabel="Information about service dashboard."
-        />
-      }
-      actions={actions}
-    >
-      Service Dashboard
+    <Header variant="h1" actions={actions}>
+      Grant Starkman
     </Header>
   );
 }
